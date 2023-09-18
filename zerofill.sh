@@ -25,11 +25,12 @@ get_sn_hds() {
     echo "Seriais enviados para $remotefilelog"
 }
 
-# Função para zerar um disco
+# Função para zerar um disco, checando se a saida do comando "dd" tem sucesso ou não
 zerar_hd() {
     local disco="$1"
-    dd if=/dev/zero of="$disco" bs=4M status=progress
-    echo "Disco $disco zerado com sucesso"
+    dd if=/dev/zero of="$disco" bs=4M status=progress &&
+    echo "Disco $disco zerado com sucesso" ||
+    echo "Disco $disco não identificado"
 }
 
 # Função para zerar todos os discos
