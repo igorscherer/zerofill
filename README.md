@@ -10,7 +10,7 @@ Este é um simples script bash que permite zerar 4 discos rígidos (HDDs) simult
 1. **Clone este repositório em sua máquina local**:
 
    ```shell
-   git clone https://github.com/igorscherer/zerofill
+   git clone https://github.com/igorscherer/zerofill.git
    
 Navegue até o diretório do projeto:
 cd seu-repositorio
