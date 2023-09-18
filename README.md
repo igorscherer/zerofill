@@ -3,7 +3,7 @@
 **AVISO: Este script realizará uma ação irreversível e apagará permanentemente todos os dados dos discos rígidos. Certifique-se de fazer backup de todos os dados importantes antes de continuar. Use com extrema cautela.**
 **WARNING: This script has irreversible results it will delete permanently all the data inside Hard disks. Make sure to backup all important data before proceding. Use it with extremely caution**
 
-Este é um simples script bash que permite zerar 4 discos rígidos (HDDs) simultaneamente usando o comando `dd`. Ele é útil para tarefas de formatação ou limpeza de dados em discos rígidos.
+Este é um simples script bash que permite zerar 4 discos rígidos (HDDs) simultaneamente usando o comando `dd` e enviar os seriais dos mesmos para um arquivo txt em algum local selecionado, no caso é um ponto de montagem /IMAGENS/seriais.txt, podendo ser alterado conforme necessário. Ele é útil para tarefas de formatação de dados em discos rígidos.
 
 ## Como Usar
 
@@ -22,7 +22,7 @@ Certifique-se de dar permissões de execução aos scripts, se necessário, usan
 **Lembre-se de que a operação de zeragem irá apagar todos os dados do disco rígido selecionado.**
 
 # Notas Importantes
-*Até o momento o script apenas funciona com Hdds que estejam montados como (SDA,SDB,SDC,SDD).*
+*Até o momento o script apenas funciona com Hdds que estejam montados como (SDA,SDB,SDC,SDD), podendo funcionar com outros tipos alterando o script.*
 
 Certifique-se de usar este script com cuidado, pois ele apagará todos os dados dos discos rígidos.
 Recomenda-se utilizá-lo com PXE Boot para utilizar um SO live com boot pela lan.
