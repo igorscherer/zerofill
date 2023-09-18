@@ -3,7 +3,7 @@
 # Script para ZeroFill com até 4 HDDs simultâneos
 # Criador: Igor Scherer
 # Criado em: 01/09/2022
-# Atualizado em: 31/05/2023 (Adicionada função para registrar o serial number dos HDDs)
+# Atualizado em: 18/09/2023 (Código refatorado)
 
 # Arquivo de log remoto
 remotefilelog="/IMAGENS/seriais.txt"
