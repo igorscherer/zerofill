@@ -3,7 +3,7 @@
 # Script para ZeroFill com até 4 HDDs simultâneos
 # Criador: Igor Scherer
 # Criado em: 01/09/2022
-# Atualizado em: 18/09/2023 (Código refatorado)
+# Atualizado em: 18/09/2023 (Código refatorado e adicionado novas verificações para os hdds)
 
 # Arquivo de log remoto
 remotefilelog="/IMAGENS/seriais.txt"
