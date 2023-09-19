@@ -8,6 +8,14 @@
 # Arquivo de log remoto
 remotefilelog="/IMAGENS/seriais.txt"
 
+# Função para verificar privilégios de superusuário
+check_root() {
+    if [[ $EUID -ne 0 ]]; then
+        echo "Este script deve ser executado como superusuário (root)." 
+        exit 1
+    fi
+}
+
 # Função para obter o serial number do computador e dos HDDs
 get_sn_hds() {
     {
@@ -25,26 +33,39 @@ get_sn_hds() {
     echo "Seriais enviados para $remotefilelog"
 }
 
-# Função para zerar um disco, checando se a saida do comando "dd" tem sucesso ou não
+# Função para zerar um disco, com tratamento de erros
 zerar_hd() {
     local disco="$1"
-    dd if=/dev/zero of="$disco" bs=4M status=progress &&
-    echo "Disco $disco zerado com sucesso" ||
-    echo "Disco $disco não identificado"
+    if [[ -e "$disco" ]]; then
+        dd if=/dev/zero of="$disco" bs=4M status=progress
+        if [[ $? -eq 0 ]]; then
+            echo "Disco $disco zerado com sucesso"
+        else
+            echo "Falha ao zerar disco $disco"
+        fi
+    else
+        echo "Disco $disco não encontrado"
+    fi
 }
 
-# Função para zerar todos os discos
-zerar_todos() {
-    get_sn_hds
-
-    # Lista de discos a serem zerados
-    discos=("/dev/sda" "/dev/sdb" "/dev/sdc" "/dev/sdd")
-
+# Função para zerar uma lista de discos
+zerar_discos() {
+    local discos=("$@")
     for disco in "${discos[@]}"; do
         zerar_hd "$disco" &
     done
-
     wait
+}
+
+# Função para zerar todos os discos especificados
+zerar_todos() {
+    check_root
+    get_sn_hds
+
+    # Lista de discos a serem zerados
+    local discos=("/dev/sda" "/dev/sdb" "/dev/sdc" "/dev/sdd")
+
+    zerar_discos "${discos[@]}"
 
     echo -e "\a"; sleep 0.5; echo -e "\a"; sleep 0.5; echo -e "\a"
     echo "Todos os HDDs foram zerados, desligando o computador em 1 minuto."
