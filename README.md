@@ -1,7 +1,9 @@
+English version: [![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/igorscherer/zerofill/blob/main/README.en-us.md)
+
+
 # ZeroFill Script para até 4 HDDs simultâneos
 
 **AVISO: Este script realizará uma ação irreversível e apagará permanentemente todos os dados dos discos rígidos. Certifique-se de fazer backup de todos os dados importantes antes de continuar. Use com extrema cautela.**
-**WARNING: This script has irreversible results it will delete permanently all the data inside Hard disks. Make sure to backup all important data before proceding. Use it with extremely caution**
 
 Este é um simples script bash que permite zerar 4 discos rígidos (HDDs) simultaneamente usando o comando `dd` e enviar os seriais dos mesmos para um arquivo txt em algum local selecionado, neste caso é um ponto de montagem /IMAGENS/seriais.txt, podendo ser alterado conforme necessário. Ele é útil para tarefas de formatação de dados em discos rígidos.
 
