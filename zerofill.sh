@@ -3,7 +3,8 @@
 # Script para ZeroFill com até 4 HDDs simultâneos
 # Criador: Igor Scherer
 # Criado em: 01/09/2022
-# Atualizado em: 18/09/2023 (Código refatorado e adicionado novas verificações para os hdds)
+# Atualizado em: 20/12/2023 (Corrigido zerrar_hd() antes acusava "Falha ao zerar disco" pois o comando dd não recebia o tamanho a ser zerado do disco)
+# Script version: 1.1.2
 
 # Arquivo de log remoto
 remotefilelog="/IMAGENS/seriais.txt"
@@ -37,7 +38,13 @@ get_sn_hds() {
 zerar_hd() {
     local disco="$1"
     if [[ -e "$disco" ]]; then
-        dd if=/dev/zero of="$disco" bs=4M status=progress
+
+        #Determina o tamanho do disco a ser zerado
+        local disk_size=$(blockdev --getsize64 "$disco")
+        local count=$((disk_size / (4 * 1024 * 1024))) # 4M tamanho do bloco
+
+
+        dd if=/dev/zero of="$disco" bs=4M count="$count" status=progress
         if [[ $? -eq 0 ]]; then
             echo "Disco $disco zerado com sucesso"
         else
